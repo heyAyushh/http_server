@@ -37,10 +37,10 @@ impl Server {
 
                             match Request::try_from(&buffer[..]) {
                                 Ok(request) => {
-                                    handler.handle_request(&request).send(&mut stream);
+                                    handler.handle_request(&request).send(&mut stream).ok();
                                 }
                                 Err(e) => {
-                                    handler.handle_bad_request(&e).send(&mut stream);
+                                    handler.handle_bad_request(&e).send(&mut stream).ok();
                                 }
                             }
                         }
